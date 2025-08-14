@@ -3,16 +3,19 @@ import { CATEGORIES } from '../data/dummy-data'
 import CategoryGridTile from "../components/CategoryGridTile"
 
 
-function renderCategoryItem(data){
-    return <CategoryGridTile title={data.item.title} color={data.item.color}/>
+function renderCategoryItem(data, nav){
+    function pressHandler(){
+        nav.navigate("MeaksOverview")
+    }
+    return <CategoryGridTile title={data.item.title} color={data.item.color} onPress={pressHandler}/>
 }
 
-function CategoriesScreen() {
+function CategoriesScreen({navigation}) {
     return (
         <>
             <FlatList data={CATEGORIES}
                 keyExtractor={(item) => item.id}
-                renderItem={(item) =>  renderCategoryItem(item)}
+                renderItem={(item) =>  renderCategoryItem(item,navigation)}
                 numColumns={2} />
         </>
     )
