@@ -5,7 +5,10 @@ import CategoryGridTile from "../components/CategoryGridTile"
 
 function renderCategoryItem(data, nav){
     function pressHandler(){
-        nav.navigate("MeaksOverview")
+        nav.navigate("MeaksOverview",
+            {
+                categoryId: data.item.id
+            })
     }
     return <CategoryGridTile title={data.item.title} color={data.item.color} onPress={pressHandler}/>
 }
