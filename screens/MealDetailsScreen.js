@@ -5,6 +5,7 @@ import MealDetails from '../components/MealDetails';
 import { withSafeAreaInsets } from 'react-native-safe-area-context';
 import Subtitle from '../components/MealDetails/Subtitle';
 import List from '../components/MealDetails/List';
+import IconButton from '../components/IconButton';
 
 function MealDetailsScreen({ route, navigation }) {
     const mealId = route.params.mealId
@@ -15,7 +16,7 @@ function MealDetailsScreen({ route, navigation }) {
 
     useLayoutEffect(() => {
         navigation.setOptions({
-            headerRight: () => { return <Button title="Tap me" onPress={headerButtonPressHandler}/> }
+            headerRight: () => { return <IconButton onPress={headerButtonPressHandler} size={24} color={"white"} icon={"star"}/> }
         })
     },[navigation,headerButtonPressHandler])
 
