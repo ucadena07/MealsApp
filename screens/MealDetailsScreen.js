@@ -6,21 +6,27 @@ import { withSafeAreaInsets } from 'react-native-safe-area-context';
 import Subtitle from '../components/MealDetails/Subtitle';
 import List from '../components/MealDetails/List';
 import IconButton from '../components/IconButton';
-import { FavoritesContext } from '../store/context/favorites_context';
+import { useDispatch, useSelector } from 'react-redux';
+import {addFavorite, removeFavorite} from '../store/redux/favorite'
+//import { FavoritesContext } from '../store/context/favorites_context';
 
 function MealDetailsScreen({ route, navigation }) {
-    const favoritesMealsContext = useContext(FavoritesContext)
+    //const favoritesMealsContext = useContext(FavoritesContext)
 
+    const favoriteMealIds = useSelector((state) => state.favoriteMeals.ids)
+    const dispatch = useDispatch()
 
     const mealId = route.params.mealId
 
-    const isFavorite = favoritesMealsContext.ids.includes(mealId)
+    const isFavorite = favoriteMealIds.includes(mealId)
     const selectedMeal = MEALS.find((it) => it.id === mealId)
     function headerButtonPressHandler() {
         if(isFavorite){
-            favoritesMealsContext.removeFavorite(mealId)
+            //favoritesMealsContext.removeFavorite(mealId)
+            dispatch(removeFavorite({id: mealId}))
         }else{
-            favoritesMealsContext.addFavorite(mealId)
+           // favoritesMealsContext.addFavorite(mealId)
+           dispatch(addFavorite({id: mealId}))
         }
     }
 
